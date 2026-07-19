@@ -8,76 +8,44 @@
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#2c3e50">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Yugo Laser">
-    <link rel="apple-touch-icon" href="icon.svg">
-    <link rel="manifest" href="manifest.json">
     
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #e67e22;
-            --bg-color: #f5f6fa;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --border-radius: 8px;
-            --admin-color: #8e44ad;
-            --success-color: #27ae60;
-            --danger-color: #e74c3c;
-            --danger-hover: #c0392b;
+            --primary-color: #2c3e50; --accent-color: #e67e22; --bg-color: #f5f6fa;
+            --card-bg: #ffffff; --text-color: #333333; --border-radius: 8px;
+            --admin-color: #8e44ad; --success-color: #27ae60; --danger-color: #e74c3c;
         }
-
-        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
         body { background-color: var(--bg-color); color: var(--text-color); padding: 20px; display: flex; flex-direction: column; align-items: center; }
         .container { background-color: var(--card-bg); max-width: 700px; width: 100%; padding: 25px; border-radius: var(--border-radius); box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
         h2 { text-align: center; color: var(--primary-color); border-bottom: 2px solid var(--accent-color); padding-bottom: 15px; margin-bottom: 20px; }
         h3 { color: var(--admin-color); margin-bottom: 15px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
-
-        /* Tabs System */
         .tabs { display: flex; margin-bottom: 20px; border-bottom: 2px solid #ddd; }
         .tab-btn { flex: 1; padding: 10px; background: none; border: none; font-size: 15px; font-weight: bold; cursor: pointer; color: #7f8c8d; transition: 0.3s; }
         .tab-btn.active { color: var(--accent-color); border-bottom: 3px solid var(--accent-color); }
         .panel { display: none; animation: fadeIn 0.3s; }
         .panel.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Forms */
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
         .form-group { display: flex; flex-direction: column; }
         .form-group.full-width { grid-column: span 2; }
         label { font-weight: 600; margin-bottom: 5px; font-size: 14px; color: var(--primary-color); }
-        input, select { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 15px; outline: none; transition: border-color 0.3s; }
-        input:focus, select:focus { border-color: var(--accent-color); }
-
-        /* Checkbox Khusus Box */
-        .checkbox-group { display: flex; align-items: center; background-color: #fff3cd; padding: 12px; border-radius: 4px; border: 1px solid #ffeeba; margin-bottom: 20px; cursor: pointer; }
-        .checkbox-group input { width: 20px; height: 20px; margin-right: 12px; cursor: pointer; }
-        .checkbox-group label { margin-bottom: 0; color: #856404; cursor: pointer; }
-
-        /* Buttons */
+        input, select { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 15px; outline: none; }
+        .checkbox-group { display: flex; align-items: center; background-color: #fff3cd; padding: 12px; border-radius: 4px; border: 1px solid #ffeeba; margin-bottom: 20px; }
         .button-group { display: flex; gap: 10px; margin-top: 20px; }
-        button.btn { flex: 1; padding: 12px; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; transition: opacity 0.3s; color: white; }
+        button.btn { flex: 1; padding: 12px; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; color: white; }
         .btn-hitung { background-color: var(--primary-color); }
         .btn-reset { background-color: var(--danger-color); }
         .btn-admin { background-color: var(--success-color); }
-        .btn-danger { background-color: var(--danger-color); padding: 5px 10px; font-size: 12px; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        .btn:hover, .btn-danger:hover { opacity: 0.9; }
-
-        /* Results */
+        .btn-danger { background-color: var(--danger-color); padding: 5px 10px; font-size: 12px; color: white; border: none; border-radius: 4px; }
         .result-box { margin-top: 25px; padding: 20px; background-color: var(--primary-color); color: white; border-radius: var(--border-radius); }
         .result-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 16px; }
         .result-row.total { font-size: 22px; font-weight: bold; color: var(--accent-color); border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px; margin-top: 5px; }
-        .detail-tambahan { color: #f1c40f; font-size: 14px; font-style: italic; text-align: right; margin-top: -5px; margin-bottom: 10px; }
-
-        /* Tables Admin */
         .admin-section-box { margin-bottom: 40px; padding: 15px; border: 1px dashed var(--admin-color); border-radius: 8px; background: #fafafa; }
-        .table-responsive { width: 100%; overflow-x: auto; margin-top: 15px; max-height: 300px; border: 1px solid #ddd; }
+        .table-responsive { width: 100%; overflow-x: auto; margin-top: 15px; border: 1px solid #ddd; }
         table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        table, th, td { border: 1px solid #ddd; }
-        th, td { padding: 8px; text-align: left; }
-        th { background-color: var(--admin-color); color: white; position: sticky; top: 0; }
-
+        table, th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: var(--admin-color); color: white; }
         @media (max-width: 480px) { .form-grid { grid-template-columns: 1fr; } .form-group.full-width { grid-column: span 1; } .button-group { flex-direction: column; } }
     </style>
 </head>
@@ -96,42 +64,27 @@
     <div id="panel-box" class="panel active">
         <div class="form-grid">
             <div class="form-group full-width">
-                <label for="box-bahan">Bahan & Ketebalan Box</label>
+                <label>Bahan & Ketebalan Box</label>
                 <select id="box-bahan"></select>
             </div>
             <div class="form-group">
-                <label for="box-p">Panjang (cm)</label>
-                <input type="number" id="box-p" placeholder="Contoh: 15" min="1">
+                <label>Panjang (cm)</label>
+                <input type="number" id="box-p" placeholder="0" min="1">
             </div>
             <div class="form-group">
-                <label for="box-l">Lebar (cm)</label>
-                <input type="number" id="box-l" placeholder="Contoh: 19" min="1">
+                <label>Lebar (cm)</label>
+                <input type="number" id="box-l" placeholder="0" min="1">
             </div>
             <div class="form-group full-width">
-                <label for="box-t">Tinggi (cm)</label>
-                <input type="number" id="box-t" placeholder="Contoh: 9" min="1">
+                <label>Tinggi (cm)</label>
+                <input type="number" id="box-t" placeholder="0" min="1">
             </div>
         </div>
-
-        <label class="checkbox-group" for="box-dirakit">
-            <input type="checkbox" id="box-dirakit">
-            TAMBAHAN JASA DI-RAKIT (Plus Ekstra Packing)
-        </label>
-        
-        <div class="button-group">
-            <button class="btn btn-hitung" style="flex: 100%;" onclick="hitungBox()">HITUNG HARGA BOX</button>
-        </div>
-
+        <label class="checkbox-group"><input type="checkbox" id="box-dirakit">TAMBAHAN JASA DI-RAKIT</label>
+        <button class="btn btn-hitung" style="width: 100%;" onclick="hitungBox()">HITUNG HARGA BOX</button>
         <div class="result-box" id="HasilBox" style="display: none;">
-            <div class="result-row">
-                <span>Total Luas Permukaan:</span>
-                <span><span id="res-box-luas">0</span> cm²</span>
-            </div>
-            <div id="res-box-detail-rakit" class="detail-tambahan" style="display: none;"></div>
-            <div class="result-row total">
-                <span>TOTAL HARGA BOX:</span>
-                <span id="res-box-harga">Rp 0</span>
-            </div>
+            <div class="result-row"><span>Total Luas:</span><span><span id="res-box-luas">0</span> cm²</span></div>
+            <div class="result-row total"><span>TOTAL HARGA:</span><span id="res-box-harga">Rp 0</span></div>
         </div>
     </div>
 
@@ -139,132 +92,76 @@
     <div id="panel-laser" class="panel">
         <div class="form-grid">
             <div class="form-group full-width">
-                <label for="laser-bahan">Kategori Bahan</label>
+                <label>Kategori Bahan</label>
                 <select id="laser-bahan" onchange="updateTebalLaser()"></select>
             </div>
             <div class="form-group full-width">
-                <label for="laser-tebal">Tebal (mm)</label>
+                <label>Tebal (mm)</label>
                 <select id="laser-tebal"></select>
             </div>
-            <div class="form-group">
-                <label for="laser-p">Panjang Potong (cm)</label>
-                <input type="number" id="laser-p" min="0" placeholder="0">
-            </div>
-            <div class="form-group">
-                <label for="laser-l">Lebar Potong (cm)</label>
-                <input type="number" id="laser-l" min="0" placeholder="0">
-            </div>
-            <div class="form-group">
-                <label for="laser-waktu">Waktu Potong (Menit)</label>
-                <input type="number" id="laser-waktu" min="0" placeholder="0">
-            </div>
-            <div class="form-group">
-                <label for="laser-tarif">Tarif Laser / Menit (Rp)</label>
-                <input type="number" id="laser-tarif" value="1500" min="0">
-            </div>
+            <div class="form-group"><label>Panjang Potong (cm)</label><input type="number" id="laser-p"></div>
+            <div class="form-group"><label>Lebar Potong (cm)</label><input type="number" id="laser-l"></div>
+            <div class="form-group"><label>Waktu (Menit)</label><input type="number" id="laser-waktu"></div>
+            <div class="form-group"><label>Tarif / Menit (Rp)</label><input type="number" id="laser-tarif" value="1500"></div>
         </div>
-
         <div class="button-group">
             <button class="btn btn-reset" onclick="resetLaser()">RESET</button>
-            <button class="btn btn-hitung" onclick="hitungLaser()">HITUNG HARGA LASER</button>
+            <button class="btn btn-hitung" onclick="hitungLaser()">HITUNG LASER</button>
         </div>
-
         <div class="result-box">
-            <div class="result-row">
-                <span>Harga Material:</span>
-                <span id="res-laser-bahan">Rp 0</span>
-            </div>
-            <div class="result-row">
-                <span>Ongkos Potong:</span>
-                <span id="res-laser-ongkos">Rp 0</span>
-            </div>
-            <div class="result-row total">
-                <span>TOTAL CUSTOM:</span>
-                <span id="res-laser-total">Rp 0</span>
-            </div>
+            <div class="result-row"><span>Bahan:</span><span id="res-laser-bahan">Rp 0</span></div>
+            <div class="result-row"><span>Ongkos:</span><span id="res-laser-ongkos">Rp 0</span></div>
+            <div class="result-row total"><span>TOTAL:</span><span id="res-laser-total">Rp 0</span></div>
         </div>
     </div>
 
     <!-- Panel Admin -->
     <div id="panel-admin" class="panel">
-        
         <div class="admin-section-box">
-            <h3>⚙️ Database Bahan Custom Box</h3>
+            <h3>⚙️ Database Bahan Box</h3>
             <div class="form-grid">
-                <div class="form-group">
-                    <label>Nama Bahan & Tebal</label>
-                    <input type="text" id="admin-box-nama" placeholder="Contoh: Plywood 3mm">
-                </div>
-                <div class="form-group">
-                    <label>Harga per cm² (Rp)</label>
-                    <input type="number" id="admin-box-harga" placeholder="Contoh: 35">
-                </div>
+                <div class="form-group"><label>Nama & Tebal</label><input type="text" id="admin-box-nama"></div>
+                <div class="form-group"><label>Harga/cm² (Rp)</label><input type="number" id="admin-box-harga"></div>
             </div>
             <button class="btn btn-admin" style="width: 100%; margin-top: 10px;" onclick="tambahBahanBox()">Simpan Bahan Box</button>
-
             <div class="table-responsive">
                 <table>
-                    <thead><tr><th>Nama Bahan Box</th><th>Harga / cm²</th><th>Aksi</th></tr></thead>
-                    <tbody id="tabel-admin-box">
-                        <tr><td colspan="3" style="text-align: center;">Memuat data dari Cloud...</td></tr>
-                    </tbody>
+                    <thead><tr><th>Nama</th><th>Harga</th><th>Aksi</th></tr></thead>
+                    <tbody id="tabel-admin-box"><tr><td colspan="3" style="text-align:center">Memuat data dari Cloud...</td></tr></tbody>
                 </table>
             </div>
         </div>
 
         <div class="admin-section-box">
-            <h3>⚙️ Database Material Laser Lembaran</h3>
+            <h3>⚙️ Database Material Laser</h3>
             <div class="form-grid">
-                <div class="form-group full-width">
-                    <label>Kategori Bahan</label>
-                    <input type="text" id="admin-laser-kat" placeholder="Nama bahan...">
-                </div>
-                <div class="form-group">
-                    <label>Tebal (mm)</label>
-                    <input type="number" id="admin-laser-tebal" placeholder="0">
-                </div>
-                <div class="form-group">
-                    <label>Panjang Lembaran (cm)</label>
-                    <input type="number" id="admin-laser-p" placeholder="244">
-                </div>
-                <div class="form-group">
-                    <label>Lebar Lembaran (cm)</label>
-                    <input type="number" id="admin-laser-l" placeholder="122">
-                </div>
-                <div class="form-group">
-                    <label>Modal Lembaran (Rp)</label>
-                    <input type="number" id="admin-laser-modal" placeholder="0">
-                </div>
-                <div class="form-group">
-                    <label>Margin</label>
-                    <input type="number" id="admin-laser-margin" step="0.1" placeholder="0">
-                </div>
+                <div class="form-group full-width"><label>Kategori</label><input type="text" id="admin-laser-kat"></div>
+                <div class="form-group"><label>Tebal (mm)</label><input type="number" id="admin-laser-tebal"></div>
+                <div class="form-group"><label>Panjang (cm)</label><input type="number" id="admin-laser-p" value="244"></div>
+                <div class="form-group"><label>Lebar (cm)</label><input type="number" id="admin-laser-l" value="122"></div>
+                <div class="form-group"><label>Modal (Rp)</label><input type="number" id="admin-laser-modal"></div>
+                <div class="form-group"><label>Margin</label><input type="number" id="admin-laser-margin"></div>
             </div>
             <button class="btn btn-admin" style="width: 100%; margin-top: 10px;" onclick="tambahBahanLaser()">Simpan Material Laser</button>
-
             <div class="table-responsive">
                 <table>
-                    <thead>
-                        <tr><th>Kategori</th><th>Tebal</th><th>Ukuran</th><th>Modal</th><th>Margin</th><th>Aksi</th></tr>
-                    </thead>
-                    <tbody id="tabel-admin-laser">
-                        <tr><td colspan="6" style="text-align: center;">Memuat data dari Cloud...</td></tr>
-                    </tbody>
+                    <thead><tr><th>Kategori</th><th>Tebal</th><th>Ukuran</th><th>Modal</th><th>Margin</th><th>Aksi</th></tr></thead>
+                    <tbody id="tabel-admin-laser"><tr><td colspan="6" style="text-align:center">Memuat data dari Cloud...</td></tr></tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ========================================== -->
-<!-- SCRIPT TERINTEGRASI DENGAN FIREBASE CLOUD  -->
-<!-- ========================================== -->
 <script type="module">
-    // Import SDK Firebase
+    window.onerror = function(msg, url, lineNo) {
+        alert("Terjadi masalah sistem: " + msg + " (Baris: " + lineNo + "). Mohon screenshot pesan ini.");
+        return false;
+    };
+
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
     import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, setDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-    // Konfigurasi Firebase dari akun Anda
     const firebaseConfig = {
       apiKey: "AIzaSyC0_6eKS9fiExzSLd3mWdcJ2oB5mwi0SPY",
       authDomain: "kalkulator-yugolaser.firebaseapp.com",
@@ -274,19 +171,21 @@
       appId: "1:510166963645:web:b329b1166d11fe4065eed4"
     };
 
-    // Inisialisasi Firebase & Firestore
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    let app, db;
+    try {
+        app = initializeApp(firebaseConfig);
+        db = getFirestore(app);
+    } catch (e) {
+        alert("Gagal koneksi awal ke Firebase: " + e.message);
+    }
 
     let dbBahanBox = [];
     let dbBahanLaser = [];
 
-    const formatRupiah = (angka) => {
-        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
-    };
+    const formatRupiah = (angka) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
 
     // ===============================================
-    // DEFAULT DATA (Untuk diisi ke Cloud jika kosong)
+    // SELURUH DATA MATERIAL BOX & LASER (TIDAK ADA YANG DIKURANGI)
     // ===============================================
     const defaultBahanBox = [
         { nama: "Akrilik Bening 2mm", harga: 55 },
@@ -334,27 +233,32 @@
     ];
 
     // ===============================================
-    // FETCH DATA REAL-TIME DARI FIREBASE
+    // SISTEM FETCH CLOUD FIRESTORE
     // ===============================================
-    
-    // 1. DATA BOX
     const boxRef = collection(db, "bahanBox");
     getDocs(boxRef).then(snapshot => {
-        if (snapshot.empty) { defaultBahanBox.forEach(item => addDoc(boxRef, item)); }
+        if (snapshot.empty) { 
+            defaultBahanBox.forEach(item => addDoc(boxRef, item).catch(e => alert("Gagal Simpan Otomatis (Box): " + e.message))); 
+        }
+    }).catch(e => {
+        document.getElementById("tabel-admin-box").innerHTML = `<tr><td colspan="3" style="color:red;">Error Koneksi: ${e.message}</td></tr>`;
+        alert("Akses Firebase Box Ditolak: " + e.message);
     });
 
     onSnapshot(boxRef, (snapshot) => {
         dbBahanBox = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        // Urutkan berdasarkan nama agar rapi
         dbBahanBox.sort((a, b) => a.nama.localeCompare(b.nama));
         renderDropdownBox();
         renderTabelAdminBox();
-    });
+    }, (e) => alert("Gagal baca data Box langsung: " + e.message));
 
-    // 2. DATA LASER
     const laserRef = collection(db, "bahanLaser");
     getDocs(laserRef).then(snapshot => {
-        if (snapshot.empty) { defaultDbLaser.forEach(item => addDoc(laserRef, item)); }
+        if (snapshot.empty) { 
+            defaultDbLaser.forEach(item => addDoc(laserRef, item).catch(e => alert("Gagal Simpan Otomatis (Laser): " + e.message))); 
+        }
+    }).catch(e => {
+        document.getElementById("tabel-admin-laser").innerHTML = `<tr><td colspan="6" style="color:red;">Error Koneksi: ${e.message}</td></tr>`;
     });
 
     onSnapshot(laserRef, (snapshot) => {
@@ -363,15 +267,12 @@
         renderTabelAdminLaser();
     });
 
-
     // ===============================================
-    // FUNGSI TAMPILAN & LOGIKA (Terhubung dengan Window)
+    // LOGIKA TAMPILAN & KALKULATOR
     // ===============================================
-
     window.switchTab = function(tabId) {
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.panel').forEach(panel => panel.classList.remove('active'));
-        
         if (tabId === 'box') {
             document.querySelectorAll('.tab-btn')[0].classList.add('active');
             document.getElementById('panel-box').classList.add('active');
@@ -384,14 +285,13 @@
         }
     }
 
-    // --- BOX LOGIC ---
+    // --- Box Functions ---
     function renderDropdownBox() {
         const select = document.getElementById("box-bahan");
         select.innerHTML = "";
         dbBahanBox.forEach(item => {
             let option = document.createElement("option");
-            option.value = item.harga;
-            option.textContent = `${item.nama} (Rp ${item.harga}/cm²)`;
+            option.value = item.harga; option.textContent = `${item.nama} (Rp ${item.harga}/cm²)`;
             select.appendChild(option);
         });
     }
@@ -424,55 +324,40 @@
         document.getElementById("HasilBox").style.display = "block";
     }
 
-    window.tambahBahanBox = async function() {
-        const nama = document.getElementById("admin-box-nama").value.trim();
-        const harga = parseFloat(document.getElementById("admin-box-harga").value);
-
-        if(!nama || isNaN(harga) || harga <= 0) { alert("Isi nama bahan dan harga/cm² dengan benar!"); return; }
-
-        const existing = dbBahanBox.find(item => item.nama.toLowerCase() === nama.toLowerCase());
-        
-        // Simpan langsung ke Cloud
-        if(existing) {
-            await setDoc(doc(db, "bahanBox", existing.id), { nama: nama, harga: harga });
-        } else {
-            await addDoc(collection(db, "bahanBox"), { nama: nama, harga: harga });
-        }
-
-        document.getElementById("admin-box-nama").value = "";
-        document.getElementById("admin-box-harga").value = "";
-        alert("Bahan Box berhasil disimpan ke Cloud!");
-    }
-
-    window.hapusBahanBox = async function(id, namaBahan) {
-        if(confirm(`Hapus bahan box "${namaBahan}" dari Cloud?`)) {
-            await deleteDoc(doc(db, "bahanBox", id));
-        }
-    }
-
     function renderTabelAdminBox() {
         const tbody = document.getElementById("tabel-admin-box");
         tbody.innerHTML = "";
+        if(dbBahanBox.length === 0) tbody.innerHTML = "<tr><td colspan='3' style='text-align:center;'>Data Kosong. Tambahkan Bahan.</td></tr>";
         dbBahanBox.forEach(item => {
-            tbody.innerHTML += `<tr>
-                <td>${item.nama}</td>
-                <td>Rp ${item.harga}</td>
-                <td><button class="btn-danger" onclick="hapusBahanBox('${item.id}', '${item.nama}')">Hapus</button></td>
-            </tr>`;
+            tbody.innerHTML += `<tr><td>${item.nama}</td><td>Rp ${item.harga}</td><td><button class="btn-danger" onclick="hapusBahanBox('${item.id}', '${item.nama}')">Hapus</button></td></tr>`;
         });
     }
 
-    // --- LASER LOGIC ---
+    window.tambahBahanBox = async function() {
+        const nama = document.getElementById("admin-box-nama").value.trim();
+        const harga = parseFloat(document.getElementById("admin-box-harga").value);
+        if(!nama || isNaN(harga)) return alert("Data tidak valid!");
+        
+        const existing = dbBahanBox.find(item => item.nama.toLowerCase() === nama.toLowerCase());
+        if(existing) await setDoc(doc(db, "bahanBox", existing.id), { nama, harga });
+        else await addDoc(collection(db, "bahanBox"), { nama, harga });
+        
+        document.getElementById("admin-box-nama").value = ""; document.getElementById("admin-box-harga").value = "";
+    }
+
+    window.hapusBahanBox = async function(id, namaBahan) {
+        if(confirm(`Hapus "${namaBahan}"?`)) await deleteDoc(doc(db, "bahanBox", id));
+    }
+
+    // --- Laser Functions ---
     function renderDropdownLaser() {
         const selectBahan = document.getElementById('laser-bahan');
         const kategoriUnik = [...new Set(dbBahanLaser.map(item => item.kategori))];
         
-        // Simpan pilihan sebelumnya (jika ada)
         const prevValue = selectBahan.value;
         selectBahan.innerHTML = '';
-        kategoriUnik.forEach(kategori => {
-            const option = document.createElement('option');
-            option.value = kategori; option.textContent = kategori;
+        kategoriUnik.forEach(kat => {
+            const option = document.createElement('option'); option.value = kat; option.textContent = kat;
             selectBahan.appendChild(option);
         });
         if(kategoriUnik.includes(prevValue)) selectBahan.value = prevValue;
@@ -480,14 +365,11 @@
     }
 
     window.updateTebalLaser = function() {
-        const kategoriPilih = document.getElementById('laser-bahan').value;
+        const kat = document.getElementById('laser-bahan').value;
         const selectTebal = document.getElementById('laser-tebal');
-        const dataTebal = dbBahanLaser.filter(item => item.kategori === kategoriPilih);
-        
         selectTebal.innerHTML = '';
-        dataTebal.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item.tebal; option.textContent = item.tebal + ' mm';
+        dbBahanLaser.filter(item => item.kategori === kat).forEach(item => {
+            const option = document.createElement('option'); option.value = item.tebal; option.textContent = item.tebal + ' mm';
             selectTebal.appendChild(option);
         });
     }
@@ -523,547 +405,13 @@
         document.getElementById('res-laser-total').textContent = 'Rp 0';
     }
 
-    window.tambahBahanLaser = async function() {
-        const kategori = document.getElementById('admin-laser-kat').value.trim();
-        const tebal = Number(document.getElementById('admin-laser-tebal').value);
-        const p = Number(document.getElementById('admin-laser-p').value);
-        const l = Number(document.getElementById('admin-laser-l').value);
-        const modal = Number(document.getElementById('admin-laser-modal').value);
-        const margin = Number(document.getElementById('admin-laser-margin').value);
-
-        if (!kategori || tebal<=0 || p<=0 || l<=0 || modal<=0 || margin<=0) { alert("Mohon isi semua data material laser dengan benar."); return; }
-
-        const existing = dbBahanLaser.find(item => item.kategori.toLowerCase() === kategori.toLowerCase() && item.tebal === tebal);
-        
-        if (existing) { 
-            // Update jika sudah ada
-            await setDoc(doc(db, "bahanLaser", existing.id), { kategori, tebal, p, l, modal, margin });
-        } else {
-            // Tambah baru
-            await addDoc(collection(db, "bahanLaser"), { kategori, tebal, p, l, modal, margin });
-        }
-        
-        document.querySelectorAll('#panel-admin input[id^="admin-laser-"]').forEach(inp => inp.value = '');
-        alert("Material Laser berhasil disimpan ke Cloud!");
-    }
-
-    window.hapusBahanLaser = async function(id, kategori, tebal) {
-        if (confirm(`Hapus bahan laser ${kategori} (${tebal}mm) dari Cloud?`)) {
-            await deleteDoc(doc(db, "bahanLaser", id));
-        }
-    }
-
     function renderTabelAdminLaser() {
         const tbody = document.getElementById('tabel-admin-laser');
         tbody.innerHTML = '';
+        if(dbBahanLaser.length === 0) tbody.innerHTML = "<tr><td colspan='6' style='text-align:center;'>Data Kosong.</td></tr>";
         dbBahanLaser.forEach(item => {
-            tbody.innerHTML += `<tr>
-                <td>${item.kategori}</td>
-                <td>${item.tebal} mm</td>
-                <td>${item.p}x${item.l}</td>
-                <td>${formatRupiah(item.modal)}</td>
-                <td>${item.margin}</td>
-                <td><button class="btn-danger" onclick="hapusBahanLaser('${item.id}', '${item.kategori}', '${item.tebal}')">Hapus</button></td>
-            </tr>`;
+            tbody.innerHTML += `<tr><td>${item.kategori}</td><td>${item.tebal} mm</td><td>${item.p}x${item.l}</td><td>${formatRupiah(item.modal)}</td><td>${item.margin}</td><td><button class="btn-danger" onclick="hapusBahanLaser('${item.id}', '${item.kategori}')">Hapus</button></td></tr>`;
         });
-    }
-
-    // PWA Service Worker Registration
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js')
-            .then((reg) => console.log('Service Worker registered successfully'))
-            .catch((err) => console.error('Service Worker registration failed:', err));
-    }
-</script>
-
-</body>
-</html>        /* Tabs System */
-        .tabs { display: flex; margin-bottom: 20px; border-bottom: 2px solid #ddd; }
-        .tab-btn { flex: 1; padding: 10px; background: none; border: none; font-size: 15px; font-weight: bold; cursor: pointer; color: #7f8c8d; transition: 0.3s; }
-        .tab-btn.active { color: var(--accent-color); border-bottom: 3px solid var(--accent-color); }
-        .panel { display: none; animation: fadeIn 0.3s; }
-        .panel.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Forms */
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
-        .form-group { display: flex; flex-direction: column; }
-        .form-group.full-width { grid-column: span 2; }
-        label { font-weight: 600; margin-bottom: 5px; font-size: 14px; color: var(--primary-color); }
-        input, select { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 15px; outline: none; transition: border-color 0.3s; }
-        input:focus, select:focus { border-color: var(--accent-color); }
-
-        /* Checkbox Khusus Box */
-        .checkbox-group { display: flex; align-items: center; background-color: #fff3cd; padding: 12px; border-radius: 4px; border: 1px solid #ffeeba; margin-bottom: 20px; cursor: pointer; }
-        .checkbox-group input { width: 20px; height: 20px; margin-right: 12px; cursor: pointer; }
-        .checkbox-group label { margin-bottom: 0; color: #856404; cursor: pointer; }
-
-        /* Buttons */
-        .button-group { display: flex; gap: 10px; margin-top: 20px; }
-        button.btn { flex: 1; padding: 12px; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; transition: opacity 0.3s; color: white; }
-        .btn-hitung { background-color: var(--primary-color); }
-        .btn-reset { background-color: var(--danger-color); }
-        .btn-admin { background-color: var(--success-color); }
-        .btn-danger { background-color: var(--danger-color); padding: 5px 10px; font-size: 12px; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        .btn:hover, .btn-danger:hover { opacity: 0.9; }
-
-        /* Results */
-        .result-box { margin-top: 25px; padding: 20px; background-color: var(--primary-color); color: white; border-radius: var(--border-radius); }
-        .result-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 16px; }
-        .result-row.total { font-size: 22px; font-weight: bold; color: var(--accent-color); border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px; margin-top: 5px; }
-        .detail-tambahan { color: #f1c40f; font-size: 14px; font-style: italic; text-align: right; margin-top: -5px; margin-bottom: 10px; }
-
-        /* Tables Admin */
-        .admin-section-box { margin-bottom: 40px; padding: 15px; border: 1px dashed var(--admin-color); border-radius: 8px; background: #fafafa; }
-        .table-responsive { width: 100%; overflow-x: auto; margin-top: 15px; max-height: 300px; border: 1px solid #ddd; }
-        table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        table, th, td { border: 1px solid #ddd; }
-        th, td { padding: 8px; text-align: left; }
-        th { background-color: var(--admin-color); color: white; position: sticky; top: 0; }
-
-        @media (max-width: 480px) { .form-grid { grid-template-columns: 1fr; } .form-group.full-width { grid-column: span 1; } .button-group { flex-direction: column; } }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h2>Yugo Laser Store</h2>
-    
-    <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('box')">Kalkulator Box</button>
-        <button class="tab-btn" onclick="switchTab('laser')">Kalkulator Laser</button>
-        <button class="tab-btn" onclick="switchTab('admin')">⚙️ Database</button>
-    </div>
-
-    <!-- Panel Box -->
-    <div id="panel-box" class="panel active">
-        <div class="form-grid">
-            <div class="form-group full-width">
-                <label for="box-bahan">Bahan & Ketebalan Box</label>
-                <select id="box-bahan"></select>
-            </div>
-            <div class="form-group">
-                <label for="box-p">Panjang (cm)</label>
-                <input type="number" id="box-p" placeholder="Contoh: 15" min="1">
-            </div>
-            <div class="form-group">
-                <label for="box-l">Lebar (cm)</label>
-                <input type="number" id="box-l" placeholder="Contoh: 19" min="1">
-            </div>
-            <div class="form-group full-width">
-                <label for="box-t">Tinggi (cm)</label>
-                <input type="number" id="box-t" placeholder="Contoh: 9" min="1">
-            </div>
-        </div>
-
-        <label class="checkbox-group" for="box-dirakit">
-            <input type="checkbox" id="box-dirakit">
-            TAMBAHAN JASA DI-RAKIT (Plus Ekstra Packing)
-        </label>
-        
-        <div class="button-group">
-            <button class="btn btn-hitung" style="flex: 100%;" onclick="hitungBox()">HITUNG HARGA BOX</button>
-        </div>
-
-        <div class="result-box" id="HasilBox" style="display: none;">
-            <div class="result-row">
-                <span>Total Luas Permukaan:</span>
-                <span><span id="res-box-luas">0</span> cm²</span>
-            </div>
-            <div id="res-box-detail-rakit" class="detail-tambahan" style="display: none;"></div>
-            <div class="result-row total">
-                <span>TOTAL HARGA BOX:</span>
-                <span id="res-box-harga">Rp 0</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Panel Laser -->
-    <div id="panel-laser" class="panel">
-        <div class="form-grid">
-            <div class="form-group full-width">
-                <label for="laser-bahan">Kategori Bahan</label>
-                <select id="laser-bahan" onchange="updateTebalLaser()"></select>
-            </div>
-            <div class="form-group full-width">
-                <label for="laser-tebal">Tebal (mm)</label>
-                <select id="laser-tebal"></select>
-            </div>
-            <div class="form-group">
-                <label for="laser-p">Panjang Potong (cm)</label>
-                <input type="number" id="laser-p" min="0" placeholder="0">
-            </div>
-            <div class="form-group">
-                <label for="laser-l">Lebar Potong (cm)</label>
-                <input type="number" id="laser-l" min="0" placeholder="0">
-            </div>
-            <div class="form-group">
-                <label for="laser-waktu">Waktu Potong (Menit)</label>
-                <input type="number" id="laser-waktu" min="0" placeholder="0">
-            </div>
-            <div class="form-group">
-                <label for="laser-tarif">Tarif Laser / Menit (Rp)</label>
-                <input type="number" id="laser-tarif" value="1500" min="0">
-            </div>
-        </div>
-
-        <div class="button-group">
-            <button class="btn btn-reset" onclick="resetLaser()">RESET</button>
-            <button class="btn btn-hitung" onclick="hitungLaser()">HITUNG HARGA LASER</button>
-        </div>
-
-        <div class="result-box">
-            <div class="result-row">
-                <span>Harga Material:</span>
-                <span id="res-laser-bahan">Rp 0</span>
-            </div>
-            <div class="result-row">
-                <span>Ongkos Potong:</span>
-                <span id="res-laser-ongkos">Rp 0</span>
-            </div>
-            <div class="result-row total">
-                <span>TOTAL CUSTOM:</span>
-                <span id="res-laser-total">Rp 0</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Panel Admin -->
-    <div id="panel-admin" class="panel">
-        
-        <div class="admin-section-box">
-            <h3>⚙️ Database Bahan Custom Box</h3>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Nama Bahan & Tebal</label>
-                    <input type="text" id="admin-box-nama" placeholder="Contoh: Plywood 3mm">
-                </div>
-                <div class="form-group">
-                    <label>Harga per cm² (Rp)</label>
-                    <input type="number" id="admin-box-harga" placeholder="Contoh: 35">
-                </div>
-            </div>
-            <button class="btn btn-admin" style="width: 100%; margin-top: 10px;" onclick="tambahBahanBox()">Simpan Bahan Box</button>
-
-            <div class="table-responsive">
-                <table>
-                    <thead><tr><th>Nama Bahan Box</th><th>Harga / cm²</th><th>Aksi</th></tr></thead>
-                    <tbody id="tabel-admin-box">
-                        <tr><td colspan="3" style="text-align: center;">Memuat data dari Cloud...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="admin-section-box">
-            <h3>⚙️ Database Material Laser Lembaran</h3>
-            <div class="form-grid">
-                <div class="form-group full-width">
-                    <label>Kategori Bahan</label>
-                    <input type="text" id="admin-laser-kat" placeholder="Nama bahan...">
-                </div>
-                <div class="form-group">
-                    <label>Tebal (mm)</label>
-                    <input type="number" id="admin-laser-tebal" placeholder="0">
-                </div>
-                <div class="form-group">
-                    <label>Panjang Lembaran (cm)</label>
-                    <input type="number" id="admin-laser-p" placeholder="244">
-                </div>
-                <div class="form-group">
-                    <label>Lebar Lembaran (cm)</label>
-                    <input type="number" id="admin-laser-l" placeholder="122">
-                </div>
-                <div class="form-group">
-                    <label>Modal Lembaran (Rp)</label>
-                    <input type="number" id="admin-laser-modal" placeholder="0">
-                </div>
-                <div class="form-group">
-                    <label>Margin</label>
-                    <input type="number" id="admin-laser-margin" step="0.1" placeholder="0">
-                </div>
-            </div>
-            <button class="btn btn-admin" style="width: 100%; margin-top: 10px;" onclick="tambahBahanLaser()">Simpan Material Laser</button>
-
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr><th>Kategori</th><th>Tebal</th><th>Ukuran</th><th>Modal</th><th>Margin</th><th>Aksi</th></tr>
-                    </thead>
-                    <tbody id="tabel-admin-laser">
-                        <tr><td colspan="6" style="text-align: center;">Memuat data dari Cloud...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ========================================== -->
-<!-- SCRIPT TERINTEGRASI DENGAN FIREBASE CLOUD  -->
-<!-- ========================================== -->
-<script type="module">
-    // Import SDK Firebase
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, setDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-
-    // Konfigurasi Firebase dari akun Anda
-    const firebaseConfig = {
-      apiKey: "AIzaSyC0_6eKS9fiExzSLd3mWdcJ2oB5mwi0SPY",
-      authDomain: "kalkulator-yugolaser.firebaseapp.com",
-      projectId: "kalkulator-yugolaser",
-      storageBucket: "kalkulator-yugolaser.firebasestorage.app",
-      messagingSenderId: "510166963645",
-      appId: "1:510166963645:web:b329b1166d11fe4065eed4"
-    };
-
-    // Inisialisasi Firebase & Firestore
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    let dbBahanBox = [];
-    let dbBahanLaser = [];
-
-    const formatRupiah = (angka) => {
-        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
-    };
-
-    // ===============================================
-    // DEFAULT DATA (Untuk diisi ke Cloud jika kosong)
-    // ===============================================
-    const defaultBahanBox = [
-        { nama: "Akrilik Bening 2mm", harga: 55 },
-        { nama: "Akrilik Bening 3mm", harga: 75 },
-        { nama: "Akrilik Bening 5mm", harga: 103 },
-        { nama: "Plywood tebal 8mm", harga: 28 },
-        { nama: "Teakwood Plywood 3mm", harga: 38 },
-        { nama: "Plywood 6mm", harga: 19 },
-        { nama: "Plywood 3mm", harga: 13 }
-    ];
-
-    const defaultDbLaser = [
-        { kategori: "Akrilik Bening", tebal: 2, p: 244, l: 122, modal: 635000, margin: 2.3 },
-        { kategori: "Akrilik Bening", tebal: 3, p: 244, l: 122, modal: 950000, margin: 2.3 },
-        { kategori: "Akrilik Bening", tebal: 5, p: 244, l: 122, modal: 1515000, margin: 2.3 },
-        { kategori: "Akrilik Bening", tebal: 8, p: 244, l: 122, modal: 2500000, margin: 2.3 },
-        { kategori: "Akrilik Susu", tebal: 2, p: 244, l: 122, modal: 665000, margin: 2.3 },
-        { kategori: "Akrilik Susu", tebal: 3, p: 244, l: 122, modal: 950000, margin: 2.3 },
-        { kategori: "Akrilik Susu", tebal: 5, p: 244, l: 122, modal: 1550000, margin: 2.3 },
-        { kategori: "Akrilik Susu", tebal: 8, p: 244, l: 122, modal: 2575000, margin: 2.3 },
-        { kategori: "Akrilik Warna Solid", tebal: 2, p: 244, l: 122, modal: 720000, margin: 2.3 },
-        { kategori: "Akrilik Warna Solid", tebal: 3, p: 244, l: 122, modal: 1025000, margin: 2.3 },
-        { kategori: "Akrilik Warna Solid", tebal: 5, p: 244, l: 122, modal: 1675000, margin: 2.3 },
-        { kategori: "Akrilik Warna Solid", tebal: 8, p: 244, l: 122, modal: 2675000, margin: 2.3 },
-        { kategori: "Akrilik Rayban/Mirror", tebal: 2, p: 244, l: 122, modal: 720000, margin: 2.3 },
-        { kategori: "Akrilik Rayban/Mirror", tebal: 3, p: 244, l: 122, modal: 1025000, margin: 2.3 },
-        { kategori: "Akrilik Rayban/Mirror", tebal: 5, p: 244, l: 122, modal: 1675000, margin: 2.3 },
-        { kategori: "Akrilik Rayban/Mirror", tebal: 8, p: 244, l: 122, modal: 2675000, margin: 2.3 },
-        { kategori: "Akrilik Satin", tebal: 2, p: 244, l: 122, modal: 880000, margin: 2.3 },
-        { kategori: "Akrilik Satin", tebal: 3, p: 244, l: 122, modal: 1255000, margin: 2.3 },
-        { kategori: "Akrilik Satin", tebal: 5, p: 244, l: 122, modal: 2050000, margin: 2.3 },
-        { kategori: "Akrilik Satin", tebal: 8, p: 244, l: 122, modal: 3275000, margin: 2.3 },
-        { kategori: "Teakwood", tebal: 3, p: 244, l: 122, modal: 135000, margin: 4 },
-        { kategori: "Triplek", tebal: 3, p: 244, l: 122, modal: 75000, margin: 4 },
-        { kategori: "Triplek", tebal: 6, p: 244, l: 122, modal: 135000, margin: 4 },
-        { kategori: "MDF", tebal: 3, p: 122, l: 244, modal: 70000, margin: 3.5 },
-        { kategori: "Jati", tebal: 5, p: 50, l: 8, modal: 10000, margin: 5 },
-        { kategori: "Pinus", tebal: 5, p: 50, l: 17, modal: 18000, margin: 3 },
-        { kategori: "Pinus", tebal: 3, p: 40, l: 16, modal: 15000, margin: 3 },
-        { kategori: "Stiker", tebal: 1, p: 120, l: 100, modal: 35000, margin: 3 },
-        { kategori: "Triplek", tebal: 8, p: 244, l: 122, modal: 178000, margin: 4 },
-        { kategori: "Sign Akrilik UV print", tebal: 3, p: 244, l: 122, modal: 1843000, margin: 4.3 },
-        { kategori: "Sign Akrilik UV print", tebal: 2, p: 244, l: 122, modal: 1528000, margin: 4.3 },
-        { kategori: "Mahoni", tebal: 5, p: 90, l: 9, modal: 25000, margin: 7 }
-    ];
-
-    // ===============================================
-    // FETCH DATA REAL-TIME DARI FIREBASE
-    // ===============================================
-    
-    // 1. DATA BOX
-    const boxRef = collection(db, "bahanBox");
-    getDocs(boxRef).then(snapshot => {
-        if (snapshot.empty) { defaultBahanBox.forEach(item => addDoc(boxRef, item)); }
-    });
-
-    onSnapshot(boxRef, (snapshot) => {
-        dbBahanBox = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        // Urutkan berdasarkan nama agar rapi
-        dbBahanBox.sort((a, b) => a.nama.localeCompare(b.nama));
-        renderDropdownBox();
-        renderTabelAdminBox();
-    });
-
-    // 2. DATA LASER
-    const laserRef = collection(db, "bahanLaser");
-    getDocs(laserRef).then(snapshot => {
-        if (snapshot.empty) { defaultDbLaser.forEach(item => addDoc(laserRef, item)); }
-    });
-
-    onSnapshot(laserRef, (snapshot) => {
-        dbBahanLaser = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        renderDropdownLaser();
-        renderTabelAdminLaser();
-    });
-
-
-    // ===============================================
-    // FUNGSI TAMPILAN & LOGIKA (Terhubung dengan Window)
-    // ===============================================
-
-    window.switchTab = function(tabId) {
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        document.querySelectorAll('.panel').forEach(panel => panel.classList.remove('active'));
-        
-        if (tabId === 'box') {
-            document.querySelectorAll('.tab-btn')[0].classList.add('active');
-            document.getElementById('panel-box').classList.add('active');
-        } else if (tabId === 'laser') {
-            document.querySelectorAll('.tab-btn')[1].classList.add('active');
-            document.getElementById('panel-laser').classList.add('active');
-        } else {
-            document.querySelectorAll('.tab-btn')[2].classList.add('active');
-            document.getElementById('panel-admin').classList.add('active');
-        }
-    }
-
-    // --- BOX LOGIC ---
-    function renderDropdownBox() {
-        const select = document.getElementById("box-bahan");
-        select.innerHTML = "";
-        dbBahanBox.forEach(item => {
-            let option = document.createElement("option");
-            option.value = item.harga;
-            option.textContent = `${item.nama} (Rp ${item.harga}/cm²)`;
-            select.appendChild(option);
-        });
-    }
-
-    window.hitungBox = function() {
-        const p = parseFloat(document.getElementById("box-p").value);
-        const l = parseFloat(document.getElementById("box-l").value);
-        const t = parseFloat(document.getElementById("box-t").value);
-        const hargaBahan = parseFloat(document.getElementById("box-bahan").value);
-        const isDirakit = document.getElementById("box-dirakit").checked;
-
-        if (isNaN(p) || isNaN(l) || isNaN(t) || p <= 0 || l <= 0 || t <= 0) { alert("Mohon masukkan ukuran P, L, dan T box yang valid!"); return; }
-        if (isNaN(hargaBahan)) { alert("Belum ada bahan box yang dipilih!"); return; }
-
-        const luasPermukaan = 2 * ((p * l) + (p * t) + (l * t));
-        let totalHarga = luasPermukaan * hargaBahan;
-        let biayaRakit = 0;
-
-        if (isDirakit) {
-            const sisiTerpanjang = Math.max(p, l, t);
-            if (sisiTerpanjang < 20) { biayaRakit = 15000; } else if (sisiTerpanjang >= 20 && sisiTerpanjang <= 40) { biayaRakit = 35000; } else { biayaRakit = 60000; }
-            totalHarga += biayaRakit;
-        }
-
-        document.getElementById("res-box-luas").textContent = luasPermukaan.toLocaleString('id-ID');
-        document.getElementById("res-box-harga").textContent = formatRupiah(totalHarga);
-        
-        const detailRakitEl = document.getElementById("res-box-detail-rakit");
-        if(isDirakit) { detailRakitEl.textContent = "+ Termasuk Biaya Rakit: " + formatRupiah(biayaRakit); detailRakitEl.style.display = "block"; } else { detailRakitEl.style.display = "none"; }
-        document.getElementById("HasilBox").style.display = "block";
-    }
-
-    window.tambahBahanBox = async function() {
-        const nama = document.getElementById("admin-box-nama").value.trim();
-        const harga = parseFloat(document.getElementById("admin-box-harga").value);
-
-        if(!nama || isNaN(harga) || harga <= 0) { alert("Isi nama bahan dan harga/cm² dengan benar!"); return; }
-
-        const existing = dbBahanBox.find(item => item.nama.toLowerCase() === nama.toLowerCase());
-        
-        // Simpan langsung ke Cloud
-        if(existing) {
-            await setDoc(doc(db, "bahanBox", existing.id), { nama: nama, harga: harga });
-        } else {
-            await addDoc(collection(db, "bahanBox"), { nama: nama, harga: harga });
-        }
-
-        document.getElementById("admin-box-nama").value = "";
-        document.getElementById("admin-box-harga").value = "";
-        alert("Bahan Box berhasil disimpan ke Cloud!");
-    }
-
-    window.hapusBahanBox = async function(id, namaBahan) {
-        if(confirm(`Hapus bahan box "${namaBahan}" dari Cloud?`)) {
-            await deleteDoc(doc(db, "bahanBox", id));
-        }
-    }
-
-    function renderTabelAdminBox() {
-        const tbody = document.getElementById("tabel-admin-box");
-        tbody.innerHTML = "";
-        dbBahanBox.forEach(item => {
-            tbody.innerHTML += `<tr>
-                <td>${item.nama}</td>
-                <td>Rp ${item.harga}</td>
-                <td><button class="btn-danger" onclick="hapusBahanBox('${item.id}', '${item.nama}')">Hapus</button></td>
-            </tr>`;
-        });
-    }
-
-    // --- LASER LOGIC ---
-    function renderDropdownLaser() {
-        const selectBahan = document.getElementById('laser-bahan');
-        const kategoriUnik = [...new Set(dbBahanLaser.map(item => item.kategori))];
-        
-        // Simpan pilihan sebelumnya (jika ada)
-        const prevValue = selectBahan.value;
-        selectBahan.innerHTML = '';
-        kategoriUnik.forEach(kategori => {
-            const option = document.createElement('option');
-            option.value = kategori; option.textContent = kategori;
-            selectBahan.appendChild(option);
-        });
-        if(kategoriUnik.includes(prevValue)) selectBahan.value = prevValue;
-        window.updateTebalLaser();
-    }
-
-    window.updateTebalLaser = function() {
-        const kategoriPilih = document.getElementById('laser-bahan').value;
-        const selectTebal = document.getElementById('laser-tebal');
-        const dataTebal = dbBahanLaser.filter(item => item.kategori === kategoriPilih);
-        
-        selectTebal.innerHTML = '';
-        dataTebal.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item.tebal; option.textContent = item.tebal + ' mm';
-            selectTebal.appendChild(option);
-        });
-    }
-
-    window.hitungLaser = function() {
-        const kategoriPilih = document.getElementById('laser-bahan').value;
-        const tebalPilih = Number(document.getElementById('laser-tebal').value);
-        const panjang = Number(document.getElementById('laser-p').value);
-        const lebar = Number(document.getElementById('laser-l').value);
-        const waktu = Number(document.getElementById('laser-waktu').value);
-        const tarifPerMenit = Number(document.getElementById('laser-tarif').value);
-
-        const material = dbBahanLaser.find(item => item.kategori === kategoriPilih && item.tebal === tebalPilih);
-
-        if (!material || panjang <= 0 || lebar <= 0) { alert("Harap masukkan panjang dan lebar laser yang valid."); return; }
-
-        const hargaPerCm2 = material.modal / (material.p * material.l);
-        const hargaBahan = hargaPerCm2 * (panjang * lebar) * material.margin;
-        const ongkosPotong = waktu * tarifPerMenit;
-        const total = hargaBahan + ongkosPotong;
-
-        document.getElementById('res-laser-bahan').textContent = formatRupiah(hargaBahan);
-        document.getElementById('res-laser-ongkos').textContent = formatRupiah(ongkosPotong);
-        document.getElementById('res-laser-total').textContent = formatRupiah(total);
-    }
-
-    window.resetLaser = function() {
-        document.getElementById('laser-p').value = '';
-        document.getElementById('laser-l').value = '';
-        document.getElementById('laser-waktu').value = '';
-        document.getElementById('res-laser-bahan').textContent = 'Rp 0';
-        document.getElementById('res-laser-ongkos').textContent = 'Rp 0';
-        document.getElementById('res-laser-total').textContent = 'Rp 0';
     }
 
     window.tambahBahanLaser = async function() {
@@ -1073,51 +421,19 @@
         const l = Number(document.getElementById('admin-laser-l').value);
         const modal = Number(document.getElementById('admin-laser-modal').value);
         const margin = Number(document.getElementById('admin-laser-margin').value);
-
-        if (!kategori || tebal<=0 || p<=0 || l<=0 || modal<=0 || margin<=0) { alert("Mohon isi semua data material laser dengan benar."); return; }
-
-        const existing = dbBahanLaser.find(item => item.kategori.toLowerCase() === kategori.toLowerCase() && item.tebal === tebal);
+        if (!kategori || tebal<=0 || p<=0 || l<=0 || modal<=0 || margin<=0) return alert("Mohon isi semua data form dengan lengkap!");
         
-        if (existing) { 
-            // Update jika sudah ada
-            await setDoc(doc(db, "bahanLaser", existing.id), { kategori, tebal, p, l, modal, margin });
-        } else {
-            // Tambah baru
-            await addDoc(collection(db, "bahanLaser"), { kategori, tebal, p, l, modal, margin });
-        }
+        const existing = dbBahanLaser.find(item => item.kategori.toLowerCase() === kategori.toLowerCase() && item.tebal === tebal);
+        if (existing) await setDoc(doc(db, "bahanLaser", existing.id), { kategori, tebal, p, l, modal, margin });
+        else await addDoc(collection(db, "bahanLaser"), { kategori, tebal, p, l, modal, margin });
         
         document.querySelectorAll('#panel-admin input[id^="admin-laser-"]').forEach(inp => inp.value = '');
-        alert("Material Laser berhasil disimpan ke Cloud!");
+        alert("Disimpan ke Cloud!");
     }
 
-    window.hapusBahanLaser = async function(id, kategori, tebal) {
-        if (confirm(`Hapus bahan laser ${kategori} (${tebal}mm) dari Cloud?`)) {
-            await deleteDoc(doc(db, "bahanLaser", id));
-        }
-    }
-
-    function renderTabelAdminLaser() {
-        const tbody = document.getElementById('tabel-admin-laser');
-        tbody.innerHTML = '';
-        dbBahanLaser.forEach(item => {
-            tbody.innerHTML += `<tr>
-                <td>${item.kategori}</td>
-                <td>${item.tebal} mm</td>
-                <td>${item.p}x${item.l}</td>
-                <td>${formatRupiah(item.modal)}</td>
-                <td>${item.margin}</td>
-                <td><button class="btn-danger" onclick="hapusBahanLaser('${item.id}', '${item.kategori}', '${item.tebal}')">Hapus</button></td>
-            </tr>`;
-        });
-    }
-
-    // PWA Service Worker Registration
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js')
-            .then((reg) => console.log('Service Worker registered successfully'))
-            .catch((err) => console.error('Service Worker registration failed:', err));
+    window.hapusBahanLaser = async function(id, kategori) {
+        if (confirm(`Hapus ${kategori}?`)) await deleteDoc(doc(db, "bahanLaser", id));
     }
 </script>
-
 </body>
 </html>
